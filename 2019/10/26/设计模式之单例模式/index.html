@@ -6,15 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>redfly的博客</title>
+  <title>“设计模式之单例模式” | redfly的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="差不多的少年 有着差不多的愿望从差不多的学校毕业 拿了差不多的money有差不多的父母 和差不多的家庭加差不多的班 挤差不多的地铁在差不多的写字楼里 写差不多的code用差不多的ide 修差不多的bug和差不多的同事 做差不多的需求想和差不多的姑娘 过着差不多的生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="redfly的博客">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+  <meta name="keywords" content="设计模式,单例模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="“设计模式之单例模式”">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;26&#x2F;%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F&#x2F;index.html">
 <meta property="og:site_name" content="redfly的博客">
-<meta property="og:description" content="差不多的少年 有着差不多的愿望从差不多的学校毕业 拿了差不多的money有差不多的父母 和差不多的家庭加差不多的班 挤差不多的地铁在差不多的写字楼里 写差不多的code用差不多的ide 修差不多的bug和差不多的同事 做差不多的需求想和差不多的姑娘 过着差不多的生活">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-26T07:15:29.199Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="redfly的博客" type="application/atom+xml">
@@ -153,16 +153,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-设计模式之单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-设计模式之单例模式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">“设计模式之单例模式”</a>
+    <h1 class="article-title" itemprop="name">
+      “设计模式之单例模式”
     </h1>
   
 
@@ -176,9 +174,60 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-        
+<a id="more"></a>
+
+<h2 id="单例模式有什么作用？"><a href="#单例模式有什么作用？" class="headerlink" title="单例模式有什么作用？"></a>单例模式有什么作用？</h2><p>单例模式（ Singleton pattern ）是二十三种设计模式中最简单的一种，主要作用是保证在Java运行程序中，使用单例模式的类有且只有一个实例。</p>
+<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ul>
+<li>因为只有一个实例，减少了内存消耗，降低了垃圾回收器开销。 java在创建Java实例时都需要进行内存申请；销毁垃圾时都需要进行垃圾回收，这些操作都会导致系统开销增加。</li>
+</ul>
+<hr>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ul>
+<li>不可继承，与单一职责原则冲突，一个类应该只关心自己的内部逻辑，不关心外部如何实例化。</li>
+</ul>
+<hr>
+<h3 id="单例模式有三个特点："><a href="#单例模式有三个特点：" class="headerlink" title="单例模式有三个特点："></a>单例模式有三个特点：</h3><ul>
+<li>单例模式确保一个类只有一个实例。</li>
+<li>类的实例必须由自己创建。</li>
+<li>必须为其他对象提供自己创建的实例</li>
+</ul>
+<hr>
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><p>单例模式一般分为<strong>懒汉式</strong>和<strong>饿汉式</strong>，一共有6种写法，我们这里只介绍两种写法。</p>
+<p>饿汉式写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">SingletonSlacker</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//创建实例</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonSlacker ss = <span class="keyword">new</span> SingletonSlacker();</span><br><span class="line">    <span class="comment">//该方法返回创建好的实例</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonSlacker <span class="title">getIntsance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ss;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将构造器私有化，外部不能创建该类的实例</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonSlacker</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>懒汉式写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">HungrySingleton</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//声明但不立刻创建实例</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HungrySingleton hs;</span><br><span class="line">    <span class="comment">//该方法会创建实例并返回给调用者</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HungrySingleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//双重检索，提高效率，如果对象已经创建出来就不用阻塞等待。</span></span><br><span class="line">        <span class="keyword">if</span>(hs == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="comment">//加锁，保证一次只能有一个线程进入</span></span><br><span class="line">            synchronization(<span class="keyword">this</span>)&#123;</span><br><span class="line">                <span class="comment">//如果对象没有创建出来就创建对象</span></span><br><span class="line">                <span class="keyword">if</span>(hs == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    hs = <span class="keyword">new</span> HungrySingleton();</span><br><span class="line">                &#125;    </span><br><span class="line">            &#125;</span><br><span class="line">     	 &#125;</span><br><span class="line">        <span class="comment">//返回创建好的对象</span></span><br><span class="line">        <span class="keyword">return</span> hs;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//私有化构造器，外部不能直接创建该类的实例</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">HungrySingleton</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>懒汉式和饿汉式的区别在于，饿汉式很饥渴，别人还没向他索要对象，他就先创建好了。懒汉式则是非常懒惰，非要等到别人找他要了才会创建对象。</p>
+</li>
+<li><p>饿汉式初始化加载类时反应慢，但是运行获取实例时反应快。懒汉式正好相反，初始化加载类时反应快，但是运行时获取实例反应慢。</p>
+</li>
+</ul>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>观看是给我最大的打赏<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -202,16 +251,65 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -231,8 +329,14 @@
 
 
 
+  
+  
+  
 
   
+
+  
+
   
 
 
@@ -257,8 +361,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
